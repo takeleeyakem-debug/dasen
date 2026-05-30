@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Dashen Bank | Digital Banking Excellence</title>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'outfit': ['Outfit', 'sans-serif'],
+            'grotesk': ['Space Grotesk', 'sans-serif'],
+            'mono': ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            'd-blue': {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+              950: '#0f172a',
+              980: '#0a0f1e',
+              990: '#060b18',
+            },
+            'gold': {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            }
+          },
+          animation: {
+            'float': 'float 6s ease-in-out infinite',
+            'float-slow': 'float 8s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'slide-right': 'slideRight 0.4s ease-out',
+            'fade-in': 'fadeIn 0.6s ease-out',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-20px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' },
+              '50%': { boxShadow: '0 0 40px rgba(59, 130, 246, 0.6)' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(30px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            slideRight: {
+              '0%': { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(0)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+          },
+          backgroundImage: {
+            'hero-pattern': 'linear-gradient(135deg, #060b18 0%, #0f172a 30%, #1e3a8a 70%, #0f172a 100%)',
+            'card-glow': 'linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)',
+            'gold-gradient': 'linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%)',
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0f1e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #3b82f6, #1e3a8a);
+      border-radius: 3px;
+    }
+    
+    /* Glass morphism utilities */
+    .glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    
+    .glass-light {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Smooth transitions */
+    * {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Card hover effects */
+    .hover-lift:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Gradient text */
+    .text-gradient {
+      background: linear-gradient(135deg, #60a5fa, #3b82f6, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .text-gradient-gold {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Mobile drawer animation */
+    .drawer-enter {
+      transform: translateX(100%);
+    }
+    .drawer-enter-active {
+      transform: translateX(0);
+    }
+    
+    /* Active nav indicator */
+    .nav-active {
+      position: relative;
+    }
+    .nav-active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 3px;
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="bg-[#060b18] text-white font-outfit antialiased overflow-x-hidden">
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        
+        <!-- Logo - Left Side -->
+        <a href="#" class="flex items-center gap-3 group" onclick="navigateTo('home')">
+          <div class="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center text-white font-bold text-lg lg:text-xl shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40 transition-all duration-300">
+            <i class="fas fa-building-columns"></i>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-outfit font-bold text-lg lg:text-xl tracking-tight text-white">Dashen</span>
+            <span class="font-outfit font-bold text-lg lg:text-xl tracking-tight text-gold-500 -mt-1">Bank</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation - Center -->
+        <nav class="hidden lg:flex items-center gap-1">
+          <button onclick="navigateTo('home')" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300" data-page="home">
+            <i class="fas fa-home mr-1.5"></i> Home
+          </button>
+          <button onclick="navigateTo('about')" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300" data-page="about">
+            <i class="fas fa-info-circle mr-1.5"></i> About
+          </button>
+          <button onclick="navigateTo('services')" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300" data-page="services">
+            <i class="fas fa-cube mr-1.5"></i> Services
+          </button>
+          <button onclick="navigateTo('forex')" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300" data-page="forex">
+            <i class="fas fa-chart-line mr-1.5"></i> Forex
+          </button>
+          <button onclick="navigateTo('contact')" class="nav-link px-4 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300" data-page="contact">
+            <i class="fas fa-envelope mr-1.5"></i> Contact
+          </button>
+        </nav>
+
+        <!-- Right Side Actions -->
+        <div class="flex items-center gap-3">
+          <!-- Desktop CTA -->
+          <button onclick="navigateTo('services')" class="hidden lg:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-full text-sm font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300">
+            <i class="fas fa-rocket"></i> Open Account
+          </button>
+          
+          <!-- Mobile Menu Toggle - Right Side -->
+          <button id="menuToggle" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-300" aria-label="Open menu">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MOBILE DRAWER ==================== -->
+  <div id="drawerOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden transition-all duration-300"></div>
+  
+  <div id="mobileDrawer" class="fixed top-0 right-0 w-80 h-full glass border-l border-white/10 z-50 transform translate-x-full transition-transform duration-400 ease-out shadow-2xl">
+    <div class="flex flex-col h-full">
+      <!-- Drawer Header -->
+      <div class="flex items-center justify-between p-5 border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
+            <i class="fas fa-building-columns text-white text-sm"></i>
+          </div>
+          <span class="font-outfit font-bold text-lg">Dashen <span class="text-gold-500">Bank</span></span>
+        </div>
+        <button id="drawerClose" class="w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-300">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Drawer Navigation -->
+      <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+        <button onclick="navigateTo('home'); closeDrawer();" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300">
+          <i class="fas fa-home w-6"></i> Home
+        </button>
+        <button onclick="navigateTo('about'); closeDrawer();" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300">
+          <i class="fas fa-info-circle w-6"></i> About Us
+        </button>
+        <button onclick="navigateTo('services'); closeDrawer();" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300">
+          <i class="fas fa-cube w-6"></i> Products & Services
+        </button>
+        <button onclick="navigateTo('forex'); closeDrawer();" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300">
+          <i class="fas fa-chart-line w-6"></i> Forex Desk
+        </button>
+        <button onclick="navigateTo('contact'); closeDrawer();" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300">
+          <i class="fas fa-envelope w-6"></i> Contact Us
+        </button>
+      </nav>
+
+      <!-- Drawer Footer -->
+      <div class="p-4 border-t border-white/10">
+        <button onclick="navigateTo('services'); closeDrawer();" class="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-xl font-semibold shadow-lg shadow-blue-500/20 transition-all duration-300">
+          <i class="fas fa-rocket mr-2"></i> Open Account Online
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="pt-16 lg:pt-20 min-h-screen">
+    
+    <!-- HOME PAGE -->
+    <div id="page-home" class="page-content">
+      
+      <!-- Hero Section -->
+      <section class="relative overflow-hidden bg-hero-pattern min-h-[90vh] flex items-center">
+        <!-- Animated Background Elements -->
+        <div class="absolute top-20 right-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-20 left-10 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl animate-float-slow"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-blue-600/5 to-blue-400/5 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Left Content -->
+            <div class="animate-slide-up">
+              <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light text-gold-500 font-medium text-sm mb-6">
+                <i class="fas fa-shield-alt"></i> Ethiopia's Most Trusted Bank
+              </div>
+              
+              <h1 class="font-outfit font-black text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] mb-6">
+                Banking That
+                <span class="text-gradient">Moves</span>
+                <br>With You
+              </h1>
+              
+              <p class="text-gray-400 text-lg lg:text-xl mb-8 max-w-lg leading-relaxed">
+                Experience next-generation digital banking with Dashen. Open accounts instantly, 
+                transfer funds in seconds, and access premium financial tools — trusted by 
+                <span class="text-gold-500 font-semibold">3+ million</span> Ethiopians.
+              </p>
+              
+              <div class="flex flex-wrap gap-4">
+                <button onclick="navigateTo('services')" class="group flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-full font-semibold shadow-xl shadow-blue-500/25 hover:shadow-blue-500/50 transition-all duration-300">
+                  Open Free Account
+                  <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+                <button onclick="navigateTo('services')" class="flex items-center gap-2 px-6 py-3.5 glass-light hover:bg-white/10 text-white rounded-full font-semibold transition-all duration-300">
+                  <i class="fas fa-credit-card"></i> Explore Cards
+                </button>
+              </div>
+              
+              <!-- Quick Stats -->
+              <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/10">
+                <div>
+                  <div class="font-grotesk font-bold text-2xl lg:text-3xl text-white">3M+</div>
+                  <div class="text-gray-500 text-sm mt-1">Active Users</div>
+                </div>
+                <div>
+                  <div class="font-grotesk font-bold text-2xl lg:text-3xl text-white">750+</div>
+                  <div class="text-gray-500 text-sm mt-1">Branches</div>
+                </div>
+                <div>
+                  <div class="font-grotesk font-bold text-2xl lg:text-3xl text-white">30</div>
+                  <div class="text-gray-500 text-sm mt-1">Years Trust</div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right Visual -->
+            <div class="hidden lg:flex justify-center animate-float">
+              <div class="relative">
+                <div class="w-80 h-96 glass rounded-3xl p-6 shadow-2xl">
+                  <div class="flex items-center gap-2 mb-6">
+                    <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg"></div>
+                    <span class="font-bold text-sm">Dashen Bank</span>
+                  </div>
+                  <div class="space-y-3">
+                    <div class="h-3 bg-white/10 rounded-full w-3/4"></div>
+                    <div class="h-3 bg-white/10 rounded-full w-1/2"></div>
+                    <div class="h-40 bg-white/5 rounded-2xl mt-4"></div>
+                  </div>
+                </div>
+                <!-- Floating card -->
+                <div class="absolute -bottom-6 -left-6 w-56 glass-light rounded-2xl p-4 shadow-xl">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center">
+                      <i class="fas fa-check text-green-400"></i>
+                    </div>
+                    <div>
+                      <div class="font-bold text-sm">Transfer Complete</div>
+                      <div class="text-xs text-gray-400">15,000 ETB Sent</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Grid -->
+      <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-14">
+          <span class="inline-block px-4 py-1.5 rounded-full glass-light text-blue-400 font-medium text-sm mb-4">Core Features</span>
+          <h2 class="font-outfit font-bold text-3xl sm:text-4xl lg:text-5xl mb-4">Everything You Need</h2>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">Powerful banking tools designed for your everyday financial needs</p>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="glass p-6 rounded-2xl hover-lift group cursor-pointer">
+            <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-400 text-xl mb-4 group-hover:bg-blue-500/20 transition-all">
+              <i class="fas fa-paper-plane"></i>
+            </div>
+            <h3 class="font-bold text-lg mb-2">Send to Dashen</h3>
+            <p class="text-gray-400 text-sm">Instant internal transfers with zero fees between Dashen accounts.</p>
+          </div>
+          
+          <div class="glass p-6 rounded-2xl hover-lift group cursor-pointer">
+            <div class="w-12 h-12 bg-gold-500/10 rounded-xl flex items-center justify-center text-gold-500 text-xl mb-4 group-hover:bg-gold-500/20 transition-all">
+              <i class="fas fa-building-columns"></i>
+            </div>
+            <h3 class="font-bold text-lg mb-2">Send to Other Banks</h3>
+            <p class="text-gray-400 text-sm">IPS transfers to any Ethiopian bank — fast, secure, reliable.</p>
+          </div>
+          
+          <div class="glass p-6 rounded-2xl hover-lift group cursor-pointer">
+            <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center text-green-400 text-xl mb-4 group-hover:bg-green-500/20 transition-all">
+              <i class="fas fa-mobile-screen-button"></i>
+            </div>
+            <h3 class="font-bold text-lg mb-2">Mobile Top-Up</h3>
+            <p class="text-gray-400 text-sm">Recharge airtime instantly for all Ethiopian mobile networks.</p>
+          </div>
+          
+          <div class="glass p-6 rounded-2xl hover-lift group cursor-pointer">
+            <div class="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center text-purple-400 text-xl mb-4 group-hover:bg-purple-500/20 transition-all">
+              <i class="fas fa-qrcode"></i>
+            </div>
+            <h3 class="font-bold text-lg mb-2">QR Payments</h3>
+            <p class="text-gray-400 text-sm">Scan and pay at thousands of merchants across Ethiopia.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Promo Banner -->
+      <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-950 p-8 sm:p-12 lg:p-16 text-center border border-white/10">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
+          <div class="relative z-10">
+            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-500/10 text-gold-500 font-semibold text-sm mb-4">
+              <i class="fas fa-trophy"></i> Limited Time Opportunity
+            </span>
+            <h2 class="font-outfit font-bold text-3xl sm:text-4xl lg:text-5xl mb-4">6M BIRR Creative Challenge</h2>
+            <p class="text-gray-300 text-lg max-w-2xl mx-auto mb-8">Showcase your innovation and win big. Submit your creative fintech solution for a chance to win 6 million Birr in funding and mentorship.</p>
+            <button class="px-8 py-3.5 bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-500 text-black font-bold rounded-full shadow-xl shadow-gold-500/25 transition-all duration-300">
+              Join Challenge <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="page-about" class="page-content hidden">
+      <section class="relative overflow-hidden bg-hero-pattern py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <span class="inline-block px-4 py-1.5 rounded-full glass-light text-gold-500 font-medium text-sm mb-4">Established 1995</span>
+          <h1 class="font-outfit font-black text-4xl sm:text-5xl lg:text-6xl mb-6">30 Years of <span class="text-gradient">Trust & Excellence</span></h1>
+          <p class="text-gray-400 text-lg max-w-3xl mx-auto">Building Ethiopia's financial future with integrity, innovation, and unwavering commitment to our customers since 1995.</p>
+        </div>
+      </section>
+      
+      <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="glass p-8 rounded-2xl text-center hover-lift">
+            <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-400 text-2xl mx-auto mb-4">
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">Our Mission</h3>
+            <p class="text-gray-400">To provide accessible, innovative, and secure financial solutions that empower individuals and businesses across Ethiopia.</p>
+          </div>
+          <div class="glass p-8 rounded-2xl text-center hover-lift">
+            <div class="w-16 h-16 bg-gold-500/10 rounded-2xl flex items-center justify-center text-gold-500 text-2xl mx-auto mb-4">
+              <i class="fas fa-eye"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">Our Vision</h3>
+            <p class="text-gray-400">To become the most admired financial institution in Africa by 2030, setting the standard for digital banking.</p>
+          </div>
+          <div class="glass p-8 rounded-2xl text-center hover-lift">
+            <div class="w-16 h-16 bg-green-500/10 rounded-2xl flex items-center justify-center text-green-400 text-2xl mx-auto mb-4">
+              <i class="fas fa-gem"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">Core Values</h3>
+            <p class="text-gray-400">Integrity, Customer Centricity, Innovation, Teamwork, and Excellence guide every decision we make.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- SERVICES PAGE -->
+    <div id="page-services" class="page-content hidden">
+      <section class="relative overflow-hidden bg-hero-pattern py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <span class="inline-block px-4 py-1.5 rounded-full glass-light text-blue-400 font-medium text-sm mb-4">Digital Onboarding</span>
+          <h1 class="font-outfit font-black text-4xl sm:text-5xl lg:text-6xl mb-6">Open Your <span class="text-gradient">Account Online</span></h1>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">Complete your application in minutes. No paperwork, no branch visit required.</p>
+        </div>
+      </section>
+      
+      <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+        <!-- Step Indicators -->
+        <div class="flex items-center justify-center gap-2 mb-10">
+          <div class="step-dot w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-bold text-sm">1</div>
+          <div class="w-12 h-0.5 bg-blue-600/50"></div>
+          <div class="step-dot w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-sm text-gray-400">2</div>
+          <div class="w-12 h-0.5 bg-white/10"></div>
+          <div class="step-dot w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-sm text-gray-400">3</div>
+        </div>
+        
+        <div class="glass p-8 rounded-2xl">
+          <div id="formStep1" class="form-step">
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-300 mb-2">Full Name *</label>
+              <input type="text" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-all" placeholder="Enter your full legal name">
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-300 mb-2">Phone Number *</label>
+              <input type="tel" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-all" placeholder="+251 9XX XXX XXX">
+            </div>
+            <button onclick="nextFormStep(2)" class="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-xl font-semibold transition-all duration-300">
+              Continue <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+          <div id="formStep2" class="form-step hidden">
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-300 mb-2">Account Type *</label>
+              <select class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-all">
+                <option class="bg-gray-900">Conventional Premium Savings</option>
+                <option class="bg-gray-900">Student Development Account</option>
+                <option class="bg-gray-900">Sharik Interest-Free Banking</option>
+                <option class="bg-gray-900">Business Current Account</option>
+              </select>
+            </div>
+            <div class="flex gap-3">
+              <button onclick="nextFormStep(1)" class="flex-1 py-3 bg-white/5 hover:bg-white/10 text-white rounded-xl font-semibold transition-all">← Back</button>
+              <button onclick="nextFormStep(3)" class="flex-1 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-semibold transition-all">Continue →</button>
+            </div>
+          </div>
+          <div id="formStep3" class="form-step hidden text-center">
+            <div class="text-6xl mb-4">✅</div>
+            <h3 class="font-bold text-xl mb-2">Ready to Submit</h3>
+            <p class="text-gray-400 mb-6">Review your details and submit your application.</p>
+            <button onclick="submitForm()" class="w-full py-3 bg-gradient-to-r from-gold-500 to-gold-400 text-black font-bold rounded-xl shadow-xl shadow-gold-500/25 transition-all duration-300">
+              Submit Application <i class="fas fa-check ml-2"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- FOREX PAGE -->
+    <div id="page-forex" class="page-content hidden">
+      <section class="relative overflow-hidden bg-hero-pattern py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <span class="inline-block px-4 py-1.5 rounded-full glass-light text-gold-500 font-medium text-sm mb-4">Live Rates</span>
+          <h1 class="font-outfit font-black text-4xl sm:text-5xl lg:text-6xl mb-6">Currency <span class="text-gradient">Exchange Desk</span></h1>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">Real-time exchange rates updated daily for all major currencies.</p>
+        </div>
+      </section>
+      
+      <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-2xl mx-auto">
+        <div class="glass p-8 rounded-2xl">
+          <div class="flex gap-2 mb-6 bg-white/5 rounded-full p-1">
+            <button id="buyTab" class="flex-1 py-2.5 rounded-full font-semibold text-sm bg-blue-600 text-white transition-all">Buying Rate</button>
+            <button id="sellTab" class="flex-1 py-2.5 rounded-full font-semibold text-sm text-gray-400 hover:text-white transition-all">Selling Rate</button>
+          </div>
+          
+          <div class="mb-4">
+            <select id="forexCurrency" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-all">
+              <option value="USD" class="bg-gray-900">🇺🇸 USD - US Dollar</option>
+              <option value="EUR" class="bg-gray-900">🇪🇺 EUR - Euro</option>
+              <option value="GBP" class="bg-gray-900">🇬🇧 GBP - British Pound</option>
+              <option value="AED" class="bg-gray-900">🇦🇪 AED - UAE Dirham</option>
+            </select>
+          </div>
+          
+          <div class="mb-6">
+            <input type="number" id="forexAmount" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-lg focus:border-blue-500 focus:outline-none transition-all" placeholder="Enter amount" value="100">
+          </div>
+          
+          <div class="bg-gold-500/5 border border-gold-500/20 rounded-2xl p-6 text-center">
+            <div class="text-sm text-gray-400 mb-1">Estimated Payout</div>
+            <div id="forexResult" class="font-grotesk font-bold text-4xl text-gradient-gold">0.00 ETB</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="page-contact" class="page-content hidden">
+      <section class="relative overflow-hidden bg-hero-pattern py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <span class="inline-block px-4 py-1.5 rounded-full glass-light text-blue-400 font-medium text-sm mb-4">Get In Touch</span>
+          <h1 class="font-outfit font-black text-4xl sm:text-5xl lg:text-6xl mb-6"><span class="text-gradient">Contact</span> Us</h1>
+          <p class="text-gray-400 text-lg max-w-2xl mx-auto">We're here to help. Reach out to our team for any inquiries.</p>
+        </div>
+      </section>
+      
+      <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="glass p-8 rounded-2xl">
+            <h3 class="font-bold text-xl mb-6">Send a Message</h3>
+            <div class="mb-4">
+              <input type="text" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-all" placeholder="Your Name">
+            </div>
+            <div class="mb-4">
+              <input type="email" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-all" placeholder="Your Email">
+            </div>
+            <div class="mb-6">
+              <textarea rows="4" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 focus:outline-none transition-all" placeholder="Your Message"></textarea>
+            </div>
+            <button class="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-semibold transition-all duration-300">
+              Send Message <i class="fas fa-paper-plane ml-2"></i>
+            </button>
+          </div>
+          
+          <div class="glass p-8 rounded-2xl space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-400 text-lg flex-shrink-0">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold">Email Us</h4>
+                <p class="text-gray-400">info@dashenbanksc.com</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center text-green-400 text-lg flex-shrink-0">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold">Call Us</h4>
+                <p class="text-gray-400">+251 115 18 30 30</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-gold-500/10 rounded-xl flex items-center justify-center text-gold-500 text-lg flex-shrink-0">
+                <i class="fas fa-location-dot"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold">Head Office</h4>
+                <p class="text-gray-400">Addis Ababa, Ethiopia</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/5 glass mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
+              <i class="fas fa-building-columns text-white text-xs"></i>
+            </div>
+            <span class="font-outfit font-bold text-lg">Dashen <span class="text-gold-500">Bank</span></span>
+          </div>
+          <p class="text-gray-500 text-sm">Ethiopia's premier banking institution since 1995.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-sm mb-4 text-gray-300">Quick Links</h4>
+          <div class="space-y-2">
+            <button onclick="navigateTo('about')" class="block text-gray-500 hover:text-white text-sm transition-colors">About Us</button>
+            <button onclick="navigateTo('services')" class="block text-gray-500 hover:text-white text-sm transition-colors">Services</button>
+            <button onclick="navigateTo('forex')" class="block text-gray-500 hover:text-white text-sm transition-colors">Forex</button>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-sm mb-4 text-gray-300">Support</h4>
+          <div class="space-y-2">
+            <button onclick="navigateTo('contact')" class="block text-gray-500 hover:text-white text-sm transition-colors">Contact</button>
+            <a href="#" class="block text-gray-500 hover:text-white text-sm transition-colors">FAQs</a>
+            <a href="#" class="block text-gray-500 hover:text-white text-sm transition-colors">Security</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold text-sm mb-4 text-gray-300">Connect</h4>
+          <div class="flex gap-3">
+            <a href="#" class="w-10 h-10 bg-white/5 hover:bg-blue-600 rounded-xl flex items-center justify-center text-gray-400 hover:text-white transition-all">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-white/5 hover:bg-blue-600 rounded-xl flex items-center justify-center text-gray-400 hover:text-white transition-all">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-white/5 hover:bg-blue-600 rounded-xl flex items-center justify-center text-gray-400 hover:text-white transition-all">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/5 pt-6 text-center text-gray-500 text-sm">
+        <p>&copy; 2026 Dashen Bank S.C. All rights reserved. Licensed by the National Bank of Ethiopia.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ==================== NAVIGATION SYSTEM ====================
+    let currentPage = 'home';
+    
+    function navigateTo(page) {
+      // Hide all pages
+      document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
+      // Show target page
+      const target = document.getElementById(`page-${page}`);
+      if (target) target.classList.remove('hidden');
+      
+      // Update active nav states
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('nav-active', 'text-white');
+        link.classList.add('text-gray-300');
+        if (link.dataset.page === page) {
+          link.classList.add('nav-active', 'text-white');
+          link.classList.remove('text-gray-300');
+        }
+      });
+      
+      currentPage = page;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // ==================== MOBILE DRAWER ====================
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const drawerClose = document.getElementById('drawerClose');
+    
+    function openDrawer() {
+      mobileDrawer.classList.remove('translate-x-full');
+      drawerOverlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeDrawer() {
+      mobileDrawer.classList.add('translate-x-full');
+      drawerOverlay.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    
+    menuToggle.addEventListener('click', openDrawer);
+    drawerClose.addEventListener('click', closeDrawer);
+    drawerOverlay.addEventListener('click', closeDrawer);
+    
+    // Close drawer on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+    
+    // ==================== FORM STEPS ====================
+    function nextFormStep(step) {
+      document.querySelectorAll('.form-step').forEach(s => s.classList.add('hidden'));
+      document.getElementById(`formStep${step}`).classList.remove('hidden');
+    }
+    
+    function submitForm() {
+      alert('✅ Account application submitted successfully! Our team will contact you within 24 hours.');
+      nextFormStep(1);
+    }
+    
+    // ==================== FOREX CALCULATOR ====================
+    const rates = {
+      USD: { buy: 154.88, sell: 157.97 },
+      EUR: { buy: 165.20, sell: 168.50 },
+      GBP: { buy: 194.10, sell: 198.00 },
+      AED: { buy: 42.15, sell: 43.00 }
+    };
+    
+    let forexMode = 'buy';
+    
+    const buyTab = document.getElementById('buyTab');
+    const sellTab = document.getElementById('sellTab');
+    const forexCurrency = document.getElementById('forexCurrency');
+    const forexAmountInput = document.getElementById('forexAmount');
+    const forexResultDisplay = document.getElementById('forexResult');
+    
+    function updateForex() {
+      const currency = forexCurrency?.value || 'USD';
+      const amount = parseFloat(forexAmountInput?.value) || 0;
+      const rate = rates[currency]?.[forexMode] || 1;
+      const result = amount * rate;
+      if (forexResultDisplay) {
+        forexResultDisplay.textContent = result.toFixed(2) + ' ETB';
+      }
+    }
+    
+    buyTab?.addEventListener('click', () => {
+      forexMode = 'buy';
+      buyTab.classList.add('bg-blue-600', 'text-white');
+      buyTab.classList.remove('text-gray-400');
+      sellTab.classList.remove('bg-blue-600', 'text-white');
+      sellTab.classList.add('text-gray-400');
+      updateForex();
+    });
+    
+    sellTab?.addEventListener('click', () => {
+      forexMode = 'sell';
+      sellTab.classList.add('bg-blue-600', 'text-white');
+      sellTab.classList.remove('text-gray-400');
+      buyTab.classList.remove('bg-blue-600', 'text-white');
+      buyTab.classList.add('text-gray-400');
+      updateForex();
+    });
+    
+    forexCurrency?.addEventListener('change', updateForex);
+    forexAmountInput?.addEventListener('input', updateForex);
+    
+    // Initialize forex
+    updateForex();
+    
+    // ==================== HEADER SCROLL EFFECT ====================
+    const header = document.getElementById('mainHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('shadow-2xl');
+      } else {
+        header.classList.remove('shadow-2xl');
+      }
+    });
+    
+    // Initialize home page
+    navigateTo('home');
+    
+    console.log('🚀 Dashen Bank | Premium Digital Banking Platform Ready');
+  </script>
+</body>
+</html>
